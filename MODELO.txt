@@ -1,0 +1,2 @@
+O arquivo do modelo utilizado "result/model.npy" é um arquivo binário no formato do numpy contendo os arrays
+"all_terms", "all_documents", "term_document_matrix" nesta respectiva ordem.
