@@ -2,7 +2,9 @@
 import csv
 import numpy as np
 from nltk.tokenize import word_tokenize
-from utils import init_irs
+from utils import init_irs, get_stemmer
+
+RANK_LIMIT = 10
 
 def main():
     config, logger = init_irs('BUSCA')
@@ -12,6 +14,8 @@ def main():
     model_filename = config['MODELO']
     query_filename = config['CONSULTAS']
     results_filename = config['RESULTADOS']
+    stemmer_option = config['STEMMER']
+    stemmer = get_stemmer(stemmer_option)
 
     logger.info(f'loading model in "{model_filename}"')
     with open(model_filename, 'rb') as model:
@@ -31,7 +35,7 @@ def main():
             queries.append(query_number)
             query = np.zeros((T, 1))
             for w in word_tokenize(query_text):
-                result = np.where(all_terms == w)
+                result = np.where(all_terms == stemmer.stem(w))
                 if len(result[0]) > 0:
                     index = result[0][0]
                     query[index, 0] = 1
@@ -50,8 +54,7 @@ def main():
         results_csv = csv.writer(results_file, delimiter=';')
 
         for i, query in enumerate(queries):
-            total_results = sum(results[i, :] != 0)
-            for j in range(total_results):
+            for j in range(RANK_LIMIT):
                 order = j + 1
                 document_index = sorted_results[i, j]
                 document = all_documents[document_index]

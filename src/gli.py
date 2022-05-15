@@ -7,7 +7,7 @@ import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from collections import defaultdict
-from utils import init_irs
+from utils import init_irs, get_stemmer
 
 nltk.download('stopwords')
 
@@ -18,6 +18,8 @@ def main():
     logger.info('reading gli configuration...')
     xml_filenames = re.split('\s*,\s*', config['LEIA'])
     inverted_list_filename = config['ESCREVA']
+    stemmer_option = config['STEMMER']
+    stemmer = get_stemmer(stemmer_option)
 
     inverted_list = defaultdict(list)
     stopwords_upper = [w.upper() for w in stopwords.words('english')]
@@ -42,7 +44,7 @@ def main():
             text = unidecode.unidecode(abstract.replace(';', '').strip().upper())
             for w in word_tokenize(text):
                 if w not in stopwords_upper:
-                    inverted_list[w].append(record_num)
+                    inverted_list[stemmer.stem(w)].append(record_num)
 
     logger.warning(f'{len(empty_articles)} empty articles: {empty_articles}')
     logger.info(f'writing xml file "{inverted_list_filename}"')

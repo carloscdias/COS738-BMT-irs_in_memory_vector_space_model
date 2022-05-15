@@ -21,7 +21,7 @@ def main():
     with open(inverted_list_filename, newline='') as inverted_list_file:
         inverted_list_csv = csv.reader(inverted_list_file, delimiter=';')
         for w, l in inverted_list_csv:
-            if re.match('^[A-Z]{2,}$', w):
+            if re.match('^[A-Za-z]{2,}$', w):
                 documents = ast.literal_eval(l)
                 document_counter = Counter(documents)
                 unique_documents = document_counter.keys()

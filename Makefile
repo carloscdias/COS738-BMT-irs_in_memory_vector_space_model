@@ -12,5 +12,8 @@ run_index:
 run_busca:
 	python3 src/busca.py
 
+run_avalia:
+	python3 src/avalia.py
+
 requirements:
 	pip3 install -r requirements.txt
