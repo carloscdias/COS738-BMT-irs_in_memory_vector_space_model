@@ -42,7 +42,7 @@ primeiro.
 ## F1
 
 A métrica F associa as medidas de acurácia e revocação num único valor. No caso
-particular do <img src="https://render.githubusercontent.com/render/math?math=F_1">, atribui-se pesos iguais para ambas as medidas e a métrica
+particular do <img src="https://render.githubusercontent.com/render/math?math=F_1#gh-light-mode-only">, atribui-se pesos iguais para ambas as medidas e a métrica
 resultante se torna a média ponderada entre acurácia e revocação, assumindo
 valores entre $[0, 1]. Nos gráficos abaixo, a métrica $F_1$ foi avaliada para 
 cada consulta e pode-se observar que para um maior número de queries, o $F_1$ 
