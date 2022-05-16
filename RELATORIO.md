@@ -21,6 +21,18 @@ MAP, MRR, DCG e NDCG para cada um dos sistemas de busca.
 
 ## 11 Points
 
+O gráfico de 11-points interpolated average precision foi uma medida padrão das
+competições TREC iniciais e trata-se de uma forma de visualizar a precisão e 
+revocação em 11 níveis (0%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90%, 100%)
+facilitando a comparação da performance do buscador entre diferentes mecanismos
+de busca. Para identificar um melhor buscador, procura-se neste gráfico a curva
+superior, podendo ocorrer trade-offs a serem considerados na decisão quando as
+curvas se intersectam.
+
+Nos resultados encontrados, a curva do buscador STEMMER foi sempre maior que a
+curva obtida para o buscador NOSTEMMER, indicando a melhor performance do 
+primeiro.
+
 ### STEMMER
 ![11 Points STEMMER](https://github.com/carloscdias/COS738-BMT-irs_in_memory_vector_space_model/blob/main/avalia/11points_stemmer_2.png)
 
@@ -29,29 +41,41 @@ MAP, MRR, DCG e NDCG para cada um dos sistemas de busca.
 
 ## F1
 
+A métrica F associa as medidas de acurácia e revocação num único valor. No caso
+particular do $F_1$, atribui-se pesos iguais para ambas as medidas e a métrica
+resultante se torna a média ponderada entre acurácia e revocação, assumindo
+valores entre $[0, 1]. Nos gráficos abaixo, a métrica $F_1$ foi avaliada para 
+cada consulta e pode-se observar que para um maior número de queries, o $F_1$ 
+do buscador STEMMER possui melhor resultado quando comparado ao NOSTEMMER.
+
 ### STEMMER
 ![F1 STEMMER](https://github.com/carloscdias/COS738-BMT-irs_in_memory_vector_space_model/blob/main/avalia/f1_stemmer_3.png)
 
 ### NOSTEMMER
 ![F1 NOSTEMMER](https://github.com/carloscdias/COS738-BMT-irs_in_memory_vector_space_model/blob/main/avalia/f1_nostemmer_11.png)
 
-## Precision@5
+## Precision@K
 
-### STEMMER
+A métrica de Precision@K avalia a precisão dos K primeiros resultados da consulta.
+Observa-se que tanto para as medidas de Precision@5 e Precision@10, o buscador
+STEMMER obteve uma melhor performance quando considerada a média da métrica em
+todas as consultas.
+
+### STEMMER - Precision@5
 ![Precision@5 STEMMER](https://github.com/carloscdias/COS738-BMT-irs_in_memory_vector_space_model/blob/main/avalia/precision_at_5_stemmer_4.png)
 
-### NOSTEMMER
+### NOSTEMMER - Precision@5
 ![Precision@5 NOSTEMMER](https://github.com/carloscdias/COS738-BMT-irs_in_memory_vector_space_model/blob/main/avalia/precision_at_5_nostemmer_12.png)
 
-## Precision@10
-
-### STEMMER
+### STEMMER - Precision@10
 ![Precision@10 STEMMER](https://github.com/carloscdias/COS738-BMT-irs_in_memory_vector_space_model/blob/main/avalia/precision_at_10_stemmer_5.png)
 
-### NOSTEMMER
+### NOSTEMMER - Precision@10
 ![Precision@10 NOSTEMMER](https://github.com/carloscdias/COS738-BMT-irs_in_memory_vector_space_model/blob/main/avalia/precision_at_10_nostemmer_13.png)
 
 ### MAP
+
+A métrica Mean Average Precision (MAP) ...
 
 ### STEMMER
 ![MAP STEMMER](https://github.com/carloscdias/COS738-BMT-irs_in_memory_vector_space_model/blob/main/avalia/avg_precision_map_stemmer_6.png)
