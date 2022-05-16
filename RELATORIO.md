@@ -42,7 +42,7 @@ primeiro.
 ## F1
 
 A métrica F associa as medidas de acurácia e revocação num único valor. No caso
-particular do $F_1$, atribui-se pesos iguais para ambas as medidas e a métrica
+particular do <img src="https://render.githubusercontent.com/render/math?math=F_1">, atribui-se pesos iguais para ambas as medidas e a métrica
 resultante se torna a média ponderada entre acurácia e revocação, assumindo
 valores entre $[0, 1]. Nos gráficos abaixo, a métrica $F_1$ foi avaliada para 
 cada consulta e pode-se observar que para um maior número de queries, o $F_1$ 
@@ -75,7 +75,8 @@ todas as consultas.
 
 ### MAP
 
-A métrica Mean Average Precision (MAP) ...
+A Mean Average Precision (MAP) considera a média do valor da precisão para os K
+primeiros documentos encontrados a cada vez que um documento relevante é recuperado.
 
 ### STEMMER
 ![MAP STEMMER](https://github.com/carloscdias/COS738-BMT-irs_in_memory_vector_space_model/blob/main/avalia/avg_precision_map_stemmer_6.png)
