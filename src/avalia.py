@@ -208,7 +208,7 @@ def main():
         xlabel='Query #',
         ylabel=f'R-Precision {name}',
         xlim=[0, 101],
-        filename=f'{output_dir}/rprecision_{name_underscore}_{s}.pdf',
+        filename=f'{output_dir}/rprecision_{name_underscore}_{s}.png',
         graph=plt.bar)
     logger.info(f'saving r-precision data...')
     save_data_in_csv(data, f'{output_dir}/rprecision_{name_underscore}_{s}.csv')
@@ -226,7 +226,7 @@ def main():
             xlabel='Revocação',
             ylabel='Precisão',
             xlim=[0, 1],
-            filename=get_filename('11points', 'pdf'))
+            filename=get_filename('11points', 'png'))
         logger.info(f'saving 11points {stemmer} data...')
         save_data_in_csv(data, get_filename('11points', 'csv'))
         s += 1
@@ -239,7 +239,7 @@ def main():
             xlabel='Query #',
             ylabel='F1',
             xlim=[0, 101],
-            filename=get_filename('f1', 'pdf'),
+            filename=get_filename('f1', 'png'),
             graph=plt.bar)
         logger.info(f'saving f1 {stemmer} data...')
         save_data_in_csv(data, get_filename('f1', 'csv'))
@@ -253,7 +253,7 @@ def main():
             xlabel='Query #',
             ylabel='Precisão',
             xlim=[0, 101],
-            filename=get_filename('precision_at_5', 'pdf'),
+            filename=get_filename('precision_at_5', 'png'),
             graph=plt.bar)
         logger.info(f'saving precision_at_5 {stemmer} data...')
         save_data_in_csv(data, get_filename('precision_at_5', 'csv'))
@@ -267,7 +267,7 @@ def main():
             xlabel='Query #',
             ylabel='Precisão',
             xlim=[0, 101],
-            filename=get_filename('precision_at_10', 'pdf'),
+            filename=get_filename('precision_at_10', 'png'),
             graph=plt.bar)
         logger.info(f'saving precision_at_10 {stemmer} data...')
         save_data_in_csv(data, get_filename('precision_at_10', 'csv'))
@@ -281,7 +281,7 @@ def main():
             xlabel='Query #',
             ylabel='Precisão média',
             xlim=[0, 101],
-            filename=get_filename('avg_precision_map', 'pdf'),
+            filename=get_filename('avg_precision_map', 'png'),
             graph=plt.bar)
         logger.info(f'saving avg_precision_map {stemmer} data...')
         save_data_in_csv(data, get_filename('avg_precision_map', 'csv'))
@@ -295,7 +295,7 @@ def main():
             xlabel='Query #',
             ylabel='Reciprocal rank',
             xlim=[0, 101],
-            filename=get_filename('reciprocal_rank_mrr', 'pdf'),
+            filename=get_filename('reciprocal_rank_mrr', 'png'),
             graph=plt.bar)
         logger.info(f'saving reciprocal_rank_mrr {stemmer} data...')
         save_data_in_csv(data, get_filename('reciprocal_rank_mrr', 'csv'))
@@ -309,7 +309,7 @@ def main():
             xlabel='p',
             ylabel='DCG',
             xlim=[1, 10],
-            filename=get_filename('dcg', 'pdf'))
+            filename=get_filename('dcg', 'png'))
         logger.info(f'saving dcg {stemmer} data...')
         save_data_in_csv(data, get_filename('dcg', 'csv'))
         s += 1
@@ -321,7 +321,7 @@ def main():
             xlabel='p',
             ylabel='NDCG',
             xlim=[1, 10],
-            filename=get_filename('ndcg', 'pdf'))
+            filename=get_filename('ndcg', 'png'))
         logger.info(f'saving ndcg {stemmer} data...')
         save_data_in_csv(data, get_filename('ndcg', 'csv'))
         s += 1
