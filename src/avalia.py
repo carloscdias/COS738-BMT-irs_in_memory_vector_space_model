@@ -155,6 +155,13 @@ def plot_data(data, title, xlabel, ylabel, xlim, filename, graph=plt.plot):
     if SHOULD_PLOT:
         plt.show()
 
+def save_data_in_csv(data, filename):
+    with open(filename, 'w', newline='') as file_ref:
+        file_csv = csv.writer(file_ref, delimiter=';')
+        file_csv.writerow(['X', 'Y'])
+        for line in data.T:
+            file_csv.writerow(line)
+
 def main():
     global SHOULD_PLOT
     config, logger = init_irs('AVALIA')
@@ -203,6 +210,8 @@ def main():
         xlim=[0, 101],
         filename=f'{output_dir}/rprecision_{name_underscore}_{s}.pdf',
         graph=plt.bar)
+    logger.info(f'saving r-precision data...')
+    save_data_in_csv(data, f'{output_dir}/rprecision_{name_underscore}_{s}.csv')
     s += 1
 
     for c in compare:
@@ -218,6 +227,8 @@ def main():
             ylabel='Precisão',
             xlim=[0, 1],
             filename=get_filename('11points', 'pdf'))
+        logger.info(f'saving 11points {stemmer} data...')
+        save_data_in_csv(data, get_filename('11points', 'csv'))
         s += 1
 
         # f1
@@ -230,6 +241,8 @@ def main():
             xlim=[0, 101],
             filename=get_filename('f1', 'pdf'),
             graph=plt.bar)
+        logger.info(f'saving f1 {stemmer} data...')
+        save_data_in_csv(data, get_filename('f1', 'csv'))
         s += 1
 
         # precision@5
@@ -242,6 +255,8 @@ def main():
             xlim=[0, 101],
             filename=get_filename('precision_at_5', 'pdf'),
             graph=plt.bar)
+        logger.info(f'saving precision_at_5 {stemmer} data...')
+        save_data_in_csv(data, get_filename('precision_at_5', 'csv'))
         s += 1
 
         # precision@10
@@ -254,6 +269,8 @@ def main():
             xlim=[0, 101],
             filename=get_filename('precision_at_10', 'pdf'),
             graph=plt.bar)
+        logger.info(f'saving precision_at_10 {stemmer} data...')
+        save_data_in_csv(data, get_filename('precision_at_10', 'csv'))
         s += 1
 
         # MAP
@@ -266,6 +283,8 @@ def main():
             xlim=[0, 101],
             filename=get_filename('avg_precision_map', 'pdf'),
             graph=plt.bar)
+        logger.info(f'saving avg_precision_map {stemmer} data...')
+        save_data_in_csv(data, get_filename('avg_precision_map', 'csv'))
         s += 1
 
         # MRR
@@ -278,6 +297,8 @@ def main():
             xlim=[0, 101],
             filename=get_filename('reciprocal_rank_mrr', 'pdf'),
             graph=plt.bar)
+        logger.info(f'saving reciprocal_rank_mrr {stemmer} data...')
+        save_data_in_csv(data, get_filename('reciprocal_rank_mrr', 'csv'))
         s += 1
 
         # DCG
@@ -289,6 +310,8 @@ def main():
             ylabel='DCG',
             xlim=[1, 10],
             filename=get_filename('dcg', 'pdf'))
+        logger.info(f'saving dcg {stemmer} data...')
+        save_data_in_csv(data, get_filename('dcg', 'csv'))
         s += 1
 
         # NDCG
@@ -299,6 +322,8 @@ def main():
             ylabel='NDCG',
             xlim=[1, 10],
             filename=get_filename('ndcg', 'pdf'))
+        logger.info(f'saving ndcg {stemmer} data...')
+        save_data_in_csv(data, get_filename('ndcg', 'csv'))
         s += 1
 
 if __name__ == '__main__':
