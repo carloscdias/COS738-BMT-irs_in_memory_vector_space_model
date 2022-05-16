@@ -7,7 +7,7 @@ PROGRAM_CONFIG_FILENAME = 'config.ini'
 LOGGING_CONFIG_FILENAME = 'logging.ini'
 
 class DummyStemmer():
-    def stem(w):
+    def stem(self, w):
         return w
 
 def init_irs(name):
