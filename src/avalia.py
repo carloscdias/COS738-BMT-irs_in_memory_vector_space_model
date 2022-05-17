@@ -51,29 +51,22 @@ def normalized_discounted_cumulative_gain(expected, results, p = 10):
     total_queries = len(results)
     log_arr = np.log2([2] + list(range(2, p + 1)))
     non_normalized = np.zeros((p, total_queries))
-    normalized = np.zeros((p, total_queries))
+    normalized = np.zeros((2, total_queries))
     for i, query_number in enumerate(results.keys()):
         # for dcg the rank should be [0, r] where r > 2
         # since the rank here is a percentage, we multiply
         # its value for 100 to respect the constraint
-        rank = np.array([100.0*r[2] for r in results[query_number][:p]])
-        # add articial non-relevant documents
-        rank_arr = np.zeros((p,))
-        for j, v in enumerate(rank):
-            rank_arr[j] = v
+        rank_arr = np.array([100.0*r[2] for r in results[query_number][:p]])
         # for comparison we have to put the ideal rank in the
         # same range as ours, this rank in particular is [0, 4]
         # so multiplying for 25 puts them in the same range
-        ideal = np.array([25.0*e[1] for e in expected[query_number][:p]])
-        # add articial non-relevant documents
-        ideal_arr = np.zeros((p,))
-        for j, v in enumerate(ideal):
-            ideal_arr[j] = v
-        total = np.cumsum(rank_arr/log_arr)
-        non_normalized[:, i] = total 
-        normalized[:, i] = total/np.cumsum(ideal_arr/log_arr)
+        ideal_arr = np.array([25.0*e[1] for e in expected[query_number][:p]])
+        index = min(p, len(ideal_arr))
+        non_normalized[:, i] = np.cumsum(rank_arr/log_arr)
+        normalized[0, i] = query_number
+        normalized[1, i] = (rank_arr[:index]/log_arr[:index]).sum()/(ideal_arr/log_arr[:index]).sum()
     x = np.arange(1, p + 1)
-    return (np.vstack([x, normalized.mean(axis=1)]), np.vstack([x, non_normalized.mean(axis=1)])) 
+    return (normalized, np.vstack([x, non_normalized.mean(axis=1)])) 
 
 def reciprocal_rank(expected, results, limit = 100):
     total_queries = len(results)
@@ -307,7 +300,7 @@ def main():
         plot_data(non_normalized,
             title=f'Discounted cumulative gain ({stemmer} - média de {n_queries} queries)',
             xlabel='p',
-            ylabel='DCG',
+            ylabel='$\\overline{DCG}$',
             xlim=[1, 10],
             filename=get_filename('dcg', 'png'))
         logger.info(f'saving dcg {stemmer} data...')
@@ -317,11 +310,12 @@ def main():
         # NDCG
         logger.info(f'plotting ndcg {stemmer} - {s}')
         plot_data(normalized,
-            title=f'Normalized discounted cumulative gain ({stemmer} - média de {n_queries} queries)',
-            xlabel='p',
+            title=f'Normalized discounted cumulative gain ({stemmer} - média de {n_queries} queries: {normalized[1, :].mean().round(2)})',
+            xlabel='Query #',
             ylabel='NDCG',
-            xlim=[1, 10],
-            filename=get_filename('ndcg', 'png'))
+            xlim=[0, 101],
+            filename=get_filename('ndcg', 'png'),
+            graph=plt.bar)
         logger.info(f'saving ndcg {stemmer} data...')
         save_data_in_csv(data, get_filename('ndcg', 'csv'))
         s += 1
