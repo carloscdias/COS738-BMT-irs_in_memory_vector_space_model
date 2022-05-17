@@ -145,7 +145,10 @@ a presença de uma resposta ideal para a consulta, a qual usa para calcular um
 DCG ideal que é usado para normalizar o resultado obtido.
 
 Os gráficos abaixo apresentam o NDCG x Query # para cada buscador analisado.
-
+De modo geral, maiores valores de NDCG são observadas para as queries no buscador
+STEMMER, o que também é confirmado pelo valor médio da métrica para todas as
+consultas, mostrando a superioridade do buscador STEMMER em relação ao buscador
+NOSTEMMER para a métrica de NDCG.
 
 ### STEMMER
 ![NDCG STEMMER](https://github.com/carloscdias/COS738-BMT-irs_in_memory_vector_space_model/blob/main/avalia/ndcg_stemmer_9.png)
